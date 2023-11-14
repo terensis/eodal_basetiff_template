@@ -12,6 +12,7 @@ pip install --upgrade pip
 # install eodal_basetiffs from Github and other dependencies for visualization
 pip install contextily
 pip install imageio
+pip install matplotlib-scalebar
 pip uninstall eodal_basetiffs -y
 pip install git+https://github.com/terensis/eodal_basetiffs_GPL3
 
