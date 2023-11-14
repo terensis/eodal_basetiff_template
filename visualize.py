@@ -213,7 +213,7 @@ if __name__ == '__main__':
     products = ['fcir', 'rgb', 'ndvi']
     plot_dir = Path('plots')
     plot_dir.mkdir(exist_ok=True)
-    vector_feature = Path('aoi/aoi_cape-coast.gpkg')
+    vector_feature = Path('aoi/aoi.gpkg')
 
     plot_aoi(
         fpath_aoi=vector_feature,
