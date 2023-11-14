@@ -6,7 +6,7 @@ In addition, an animated GIF will be created from the `rgb`, `fcir` and `ndvi` p
 ## Usage
 There are only three steps required to get `eodal_basetiffs` running.
 
-1. On Github, click on "use template" on the upper right to generate a new repository from this template.
+1. On Github, click on "Use this template" on the upper right to generate a new repository from this template.
 2. Specify your area of interest (AOI) by placing a geopackage file named `aoi.gpkg` in the [aoi folder](/aoi).
 3. Execute the `eodal_basetiffs.sh` shell script by running `sh eodal_basetiffs.sh` in the (Linux) terminal.
 
