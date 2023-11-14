@@ -17,7 +17,7 @@ pip install git+https://github.com/terensis/eodal_basetiffs_GPL3
 
 
 # execute python script using the command line interface
-eodal_basetiffs -a aoi/aoi_cape-coast.gpkg -o data -t 7 -c 3857 -p sentinel-2 -r True
+eodal_basetiffs -a aoi/aoi.gpkg -o data -t 7 -c 3857 -p sentinel-2 -r True
 
 # visualize the results
 python visualize.py
