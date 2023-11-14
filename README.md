@@ -7,8 +7,9 @@ In addition, an animated GIF will be created from the `rgb`, `fcir` and `ndvi` p
 There are only three steps required to get `eodal_basetiffs` running.
 
 1. On Github, click on "Use this template" on the upper right to generate a new repository from this template.
-2. Specify your area of interest (AOI) by placing a geopackage file named `aoi.gpkg` in the [aoi folder](/aoi).
-3. Execute the `eodal_basetiffs.sh` shell script by running `sh eodal_basetiffs.sh` in the (Linux) terminal.
+2. Clone the new repository.
+3. Enter the cloned repository. Specify your area of interest (AOI) by placing a geopackage file named `aoi.gpkg` in the [aoi folder](/aoi).
+4. Execute the `eodal_basetiffs.sh` shell script by running `sh eodal_basetiffs.sh` in the (Linux) terminal. This will execute the full workflow automatically.
 
 By **default** this will query and fetch the `Sentinel-2` imagery for the AOI starting on `January 1st, 2017` and will run with an increment of `7 days` until all scenes available `till present` have been fetched. The data is projected to web mercator (EPSG:3857).
 
