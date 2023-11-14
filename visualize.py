@@ -195,7 +195,7 @@ def plot_cloud_cover(
 if __name__ == '__main__':
 
     data_dir = Path('data')
-    products = ['fcir']
+    products = ['fcir', 'rgb', 'ndvi']
     plot_dir = Path('plots')
     plot_dir.mkdir(exist_ok=True)
     vector_feature = Path('aoi/aoi_cape-coast.gpkg')
