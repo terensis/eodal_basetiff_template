@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# create virtual environment if it does not exist
+# create virtual python3.11 environment if it does not exist
 if [ ! -d ".venv" ]; then
-    virtualenv -q -p /usr/bin/python .venv
+    virtualenv -q -p /usr/bin/python3.11 .venv
 fi
 
 # activate virtual environment
@@ -17,8 +17,31 @@ pip uninstall eodal_basetiffs -y
 pip install git+https://github.com/terensis/eodal_basetiffs_GPL3
 
 
+# initialize variable defaults for command line arguments
+aoi=""
+output=""
+tempincrement=""
+targetcrs=""
+product=""
+# resample=""
+
+# parse command line arguments
+while getopts a:o:t:c:p:r: flag
+do
+    case "${flag}" in
+        a) aoi=${OPTARG};;
+        o) output=${OPTARG};;
+        t) tempincrement=${OPTARG};;
+        c) targetcrs=${OPTARG};;
+        p) product=${OPTARG};;
+        r) resample=${OPTARG};;
+    esac
+done
+
 # execute python script using the command line interface
-eodal_basetiffs -a aoi/aoi.gpkg -o data -t 7 -c 3857 -p sentinel-2 -r True
+# for testing, the -r option is not set, e.g. the script terminates!
+eodal_basetiffs -a "$aoi" -o "$output" -t "$tempincrement" -c "$targetcrs" -p "$product"
+
 
 # visualize the results
-python visualize.py
+python visualize.py -a "$aoi"
