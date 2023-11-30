@@ -3,3 +3,4 @@ plots/
 .venv
 aoi/*gpkg
 aoi/*shp
+host_output/

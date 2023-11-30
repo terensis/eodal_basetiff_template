@@ -47,9 +47,16 @@ parser.add_argument(
     type=str,
     help="path to the GeoPackage or Shapefile with the area of interest",
 )
+parser.add_argument(
+    "-o",
+    "--output-parent-dir",
+    type=str,
+    help="path to the directory where the plots should be stored",
+)
 
 # parse CLI arguments
 args = parser.parse_args()
+output - parent - dir
 
 
 def generate_plots(
@@ -192,9 +199,10 @@ def plot_cloud_cover(data_dir: Path, plot_dir: Path) -> None:
 
 
 if __name__ == "__main__":
-    data_dir = Path("data")
+    parent_dir = Path(args.output_parent_dir)
+    data_dir = parent_dir
     products = ["fcir", "rgb", "ndvi"]
-    plot_dir = Path("plots")
+    plot_dir = Path(parent_dir.joinpath("Plots"))
     plot_dir.mkdir(exist_ok=True)
 
     vector_feature = Path(args.area_of_interest)

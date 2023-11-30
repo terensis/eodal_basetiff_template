@@ -5,7 +5,7 @@ FROM python:3.11
 WORKDIR /app
 
 # Add the current directory contents into the container at /app
-COPY . ./app
+COPY . .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip && \
@@ -15,8 +15,8 @@ RUN pip install --upgrade pip && \
     pip install matplotlib-scalebar && \
     pip install git+https://github.com/terensis/eodal_basetiffs_GPL3
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
+# make the script executable
+RUN chmod +x ./eodal_basetiffs.sh
 
 # Run eodal_basetiffs.sh when the container launches
-ENTRYPOINT ["./eodal_basetiffs.sh",]
+ENTRYPOINT ["./eodal_basetiffs.sh"]

@@ -16,3 +16,42 @@ By **default** this will query and fetch the `Sentinel-2` imagery for the AOI st
 ## Output
 
 By **default**, the satellite data products output by `eodal_basetiffs` will be stored by acquisition date in the `data` subdirectory created in the root of this repository. Plots (maps and animations) of these will be stored in `plots`.
+
+
+## Setup dockerfile
+First, build the dockerfile into a docker image: 
+```bash
+sudo docker build -t your-image-name .
+```
+In this command, your-image-name should be replaced with the name you want to give to your Docker image, and the . specifies that Docker should look for the Dockerfile in the current directory.
+
+You can check for your available images by: 
+```bash
+sudo docker images
+```
+
+Unused images can be deleted by:
+```bash
+sudo docker rmi your-image-name -f
+```
+
+Then, you can run the created docker image:
+```bash
+sudo docker run --rm --name your-container-name your-image-name 
+
+```
+Don't forget to set the CLI arguments for the `.sh` script
+```bash
+sudo docker run --rm --name your-container-name your-image-name  -a -t ...
+```
+
+### Run dockerfile with volumes
+```bash
+sudo docker run -v /host_output:/app/container_output --rm --name your-container-name your-image-name  -a -t
+```
+
+We have to use [bind mounts](https://docs.docker.com/storage/bind-mounts/) for the output to be written to the host's filesystem. The `$(pwd)` sub-command expands to the current working directory on Linux or macOS hosts.
+```bash
+sudo docker run --mount type=bind,source="$(pwd)"/host_output,target=/app/container_output --rm --name testrun eodal_basetiff -a aoi/kanton_sh.gpkg -o container_output -t 7 -p sentinel-2
+```
+

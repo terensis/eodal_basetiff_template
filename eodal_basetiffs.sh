@@ -21,7 +21,7 @@ pip install git+https://github.com/terensis/eodal_basetiffs_GPL3
 aoi=""
 output=""
 tempincrement=""
-targetcrs=""
+targetcrs=3857
 product=""
 # resample=""
 
