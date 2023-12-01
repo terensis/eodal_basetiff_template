@@ -1,13 +1,13 @@
 version: '3'
 services:
   app:
-    image: ghcr.io/terensis/eodal_basetiff:latest
+    image: ghcr.io/terensis/eodal_basetiffs:latest
     volumes:
       - ./host_output:/app/container_output
     command:
       [
         "-a",
-        "aoi/kanton_sh.gpkg",
+        "aoi/aoi.gpkg",
         "-o",
         "container_output",
         "-t",
@@ -18,5 +18,3 @@ services:
     container_name: testrun
 volumes:
   host_output:
-
-
