@@ -97,7 +97,8 @@ def generate_plots(
         f, ax = plt.subplots()
         if len(rc) == 1:
             rc.plot_band(
-                rc.band_names[0], colormap="viridis", colorbar_label=product_name, ax=ax
+                rc.band_names[0], colormap="viridis",
+                colorbar_label=product_name, ax=ax
             )
         elif len(rc) == 3:
             rc.plot_multiple_bands(band_selection=rc.band_names, ax=ax)
@@ -107,7 +108,8 @@ def generate_plots(
         ax.add_artist(scalebar)
 
         # save the figure
-        f.savefig(plot_dir.joinpath(f"{scene_dir.name}_{product_name}.png"), dpi=150)
+        f.savefig(plot_dir.joinpath(
+            f"{scene_dir.name}_{product_name}.png"), dpi=150)
         plt.close(f)
 
 
