@@ -13,7 +13,6 @@ RUN pip install --upgrade pip && \
     pip install contextily && \
     pip install imageio && \
     pip install matplotlib-scalebar && \
-    pip install git+https://github.com/terensis/eodal_basetiffs_GPL3
 
 # make the script executable
 RUN chmod +x ./eodal_basetiffs.sh
