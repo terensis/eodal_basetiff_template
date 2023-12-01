@@ -18,40 +18,16 @@ By **default** this will query and fetch the `Sentinel-2` imagery for the AOI st
 By **default**, the satellite data products output by `eodal_basetiffs` will be stored by acquisition date in the `data` subdirectory created in the root of this repository. Plots (maps and animations) of these will be stored in `plots`.
 
 
-## Setup dockerfile
-First, build the dockerfile into a docker image: 
-```bash
-sudo docker build -t your-image-name .
-```
-In this command, your-image-name should be replaced with the name you want to give to your Docker image, and the . specifies that Docker should look for the Dockerfile in the current directory.
+## Use docker compose
+The docker `compose.yaml` file pulls the [published docker image](https://github.com/orgs/terensis/ packages/container/package/eodal_basetiff) and runs the docker container. 
 
-You can check for your available images by: 
-```bash
-sudo docker images
-```
+For this to work, you must:
+- Create an AOI directory and copy the AOI-geopackage file to it `mkdir aoi`
+- Create an output directory for the host machine `mkdir host_output`
 
-Unused images can be deleted by:
+Then, you can run the docker compose file:
 ```bash
-sudo docker rmi your-image-name -f
+sudo docker compose up
 ```
 
-Then, you can run the created docker image:
-```bash
-sudo docker run --rm --name your-container-name your-image-name 
-
-```
-Don't forget to set the CLI arguments for the `.sh` script
-```bash
-sudo docker run --rm --name your-container-name your-image-name  -a -t ...
-```
-
-### Run dockerfile with volumes
-```bash
-sudo docker run -v /host_output:/app/container_output --rm --name your-container-name your-image-name  -a -t
-```
-
-We have to use [bind mounts](https://docs.docker.com/storage/bind-mounts/) for the output to be written to the host's filesystem. The `$(pwd)` sub-command expands to the current working directory on Linux or macOS hosts.
-```bash
-sudo docker run --mount type=bind,source="$(pwd)"/host_output,target=/container/container_output --rm --name your-container-name your-image-name -a path/to/aoi/file.gpkg -o /container/container_output -t 7 -p sentinel-2
-```
 
