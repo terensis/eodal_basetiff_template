@@ -52,6 +52,6 @@ sudo docker run -v /host_output:/app/container_output --rm --name your-container
 
 We have to use [bind mounts](https://docs.docker.com/storage/bind-mounts/) for the output to be written to the host's filesystem. The `$(pwd)` sub-command expands to the current working directory on Linux or macOS hosts.
 ```bash
-sudo docker run --mount type=bind,source="$(pwd)"/host_output,target=/app/container_output --rm --name testrun eodal_basetiff -a aoi/kanton_sh.gpkg -o container_output -t 7 -p sentinel-2
+sudo docker run --mount type=bind,source="$(pwd)"/host_output,target=/container/container_output --rm --name your-container-name your-image-name -a path/to/aoi/file.gpkg -o /container/container_output -t 7 -p sentinel-2
 ```
 

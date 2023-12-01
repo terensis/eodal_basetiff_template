@@ -56,7 +56,6 @@ parser.add_argument(
 
 # parse CLI arguments
 args = parser.parse_args()
-output - parent - dir
 
 
 def generate_plots(

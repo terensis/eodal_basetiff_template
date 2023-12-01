@@ -44,4 +44,4 @@ eodal_basetiffs -a "$aoi" -o "$output" -t "$tempincrement" -c "$targetcrs" -p "$
 
 
 # visualize the results
-python visualize.py -a "$aoi"
+python visualize.py -a "$aoi" -o "$output"
