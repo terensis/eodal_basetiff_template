@@ -12,7 +12,7 @@ RUN pip install --upgrade pip && \
     pip install virtualenv && \
     pip install contextily && \
     pip install imageio && \
-    pip install matplotlib-scalebar && \
+    pip install matplotlib-scalebar
 
 # make the script executable
 RUN chmod +x ./eodal_basetiffs.sh

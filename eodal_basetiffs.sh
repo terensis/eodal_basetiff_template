@@ -23,7 +23,7 @@ output=""
 tempincrement=""
 targetcrs=3857
 product=""
-# resample=""
+recursive=""
 
 # parse command line arguments
 while getopts a:o:t:c:p:r: flag
@@ -34,13 +34,13 @@ do
         t) tempincrement=${OPTARG};;
         c) targetcrs=${OPTARG};;
         p) product=${OPTARG};;
-        r) resample=${OPTARG};;
+        r) recursive=${OPTARG};;
     esac
 done
 
 # execute python script using the command line interface
 # for testing, the -r option is not set, e.g. the script terminates!
-eodal_basetiffs -a "$aoi" -o "$output" -t "$tempincrement" -c "$targetcrs" -p "$product"
+eodal_basetiffs -a "$aoi" -o "$output" -t "$tempincrement" -c "$targetcrs" -p "$product" -r "$recursive"
 
 
 # visualize the results
