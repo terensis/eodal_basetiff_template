@@ -81,6 +81,12 @@ def generate_plots(
             fpath_product = next(scene_dir.glob(f"*{product}.tif"))
         except StopIteration:
             continue
+        # name of the plot
+        fname_scene_plot = plot_dir.joinpath(
+            f"{scene_dir.name}_{product_name}.png")
+        if fname_scene_plot.exists():
+            continue
+
         rc = RasterCollection.from_multi_band_raster(
             fpath_product, vector_features=vector_feature
         )
@@ -108,8 +114,7 @@ def generate_plots(
         ax.add_artist(scalebar)
 
         # save the figure
-        f.savefig(plot_dir.joinpath(
-            f"{scene_dir.name}_{product_name}.png"), dpi=150)
+        f.savefig(fname_scene_plot, dpi=150)
         plt.close(f)
 
 
@@ -146,6 +151,12 @@ def plot_aoi(fpath_aoi: Path, plot_dir: Path) -> None:
     :param plot_dir:
         directory for storing the plot
     """
+    # check if the plot exists already; in this case there
+    # is nothing to do.
+    fname_plot_aoi = plot_dir.joinpath("aoi.png")
+    if fname_plot_aoi.exists():
+        return
+
     gdf = gpd.read_file(fpath_aoi)
 
     f, ax = plt.subplots()
@@ -157,7 +168,7 @@ def plot_aoi(fpath_aoi: Path, plot_dir: Path) -> None:
     )
     ax.set_axis_off()
 
-    f.savefig(plot_dir.joinpath("aoi.png"), dpi=150)
+    f.savefig(fname_plot_aoi, dpi=150)
     plt.close(f)
 
 
@@ -208,10 +219,14 @@ if __name__ == "__main__":
 
     vector_feature = Path(args.area_of_interest)
 
+    # plot a map of the area of interest (AOI). Ignored if
+    # the map exists already.
     plot_aoi(fpath_aoi=vector_feature, plot_dir=plot_dir)
 
+    # plot the cloud cover time series and histogram
     plot_cloud_cover(data_dir=data_dir, plot_dir=plot_dir)
 
+    # plot the single scenes. Existing scenes are ignored.
     for product in products:
         generate_plots(
             data_dir=data_dir,
