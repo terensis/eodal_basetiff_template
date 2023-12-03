@@ -4,17 +4,23 @@ services:
     image: ghcr.io/terensis/eodal_basetiffs:latest
     volumes:
       - ./host_output:/app/container_output
+      - ./aoi:/app/aoi
     command:
       [
         "-a",
         "aoi/aoi.gpkg",
         "-o",
         "container_output",
+        "-c",
+        "2056",
         "-t",
         "7",
         "-p",
-        "sentinel-2" # "-r"  # Set this flag if you want the s2 download to run through
+        "sentinel-2",
+        "-r",
+        "True"
       ]
-    container_name: testrun
+    container_name: eodal_basetiffs_run
 volumes:
   host_output:
+  aoi:
