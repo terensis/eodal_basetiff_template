@@ -6,18 +6,49 @@ In addition, an animated GIF will be created from the `rgb`, `fcir` and `ndvi` p
 ## Usage
 
 ### Using docker compose
-The docker `compose.yaml` file pulls the [published docker image](https://github.com/orgs/terensis/packages/container/package/)eodal_basetiff) and runs the docker container. This is the **recommended way** to use this repository.
+The docker `compose.yaml` file pulls the [published docker image](https://github.com/orgs/terensis/packages/container/package/) and runs the docker container. This is the **recommended way** to use this repository.
 
 For this to work, you must:
 - Create an AOI directory and copy the AOI-geopackage file to it `mkdir aoi`
 - Create an output directory for the host machine `mkdir host_output`
+
+Adopt the content of `compose.yaml` if necessary:
+
+```yaml
+version: '3'
+services:
+  app:
+    image: ghcr.io/terensis/eodal_basetiffs:latest  # image to pull
+    volumes:
+      - ./host_output:/app/container_output         # directory on the host where outputs are written to (./host_output)
+      - ./aoi:/app/aoi                              # directory on the host with the AOI file (./aoi)
+    command:
+      [
+        "-a",
+        "aoi/aoi.gpkg",                             # AOI file on the host. Directory must match directory specified in volumes
+        "-o",
+        "container_output",                         # Container internal output directory. Is bind to ./host_output in the volumes
+        "-c",
+        "2056",                                     # spatial reference system in EPSG notation (here: Swiss LV95)
+        "-t",
+        "7",                                        # temporal increment in days (here: 7 days)
+        "-p",
+        "sentinel-2",                               # remote sensing platform to query (here: Sentinel-2)
+        "-r",
+        "True"                                      # run till complete - i.e., download all available scenes (here: True)?
+      ]
+    container_name: eodal_basetiffs_run             # name of the container. Can be changed.
+volumes:
+  host_output:
+  aoi:
+```
 
 Then, you can run the docker compose file:
 ```bash
 sudo docker compose up
 ```
 
-The outputs will be stored in the output directory defined in the `compose.yaml`. 
+The outputs will be stored in the output directory defined in the `compose.yaml` (`host_output` in the example above). 
 
 ### Using source code repository
 There are only three steps required to get `eodal_basetiffs` running.
