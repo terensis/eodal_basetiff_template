@@ -14,7 +14,7 @@ pip install contextily
 pip install imageio
 pip install matplotlib-scalebar
 pip uninstall eodal_basetiffs -y
-pip install git+https://github.com/terensis/eodal_basetiffs_GPL3@1.1
+pip install git+https://github.com/terensis/eodal_basetiffs_GPL3@1.2
 
 
 # initialize variable defaults for command line arguments
