@@ -7,6 +7,9 @@ WORKDIR /app
 # Add the current directory contents into the container at /app
 COPY . .
 
+# Install GDAL dependencies
+RUN apt-get update -y && apt-get install -y libpq-dev gdal-bin libgdal-dev && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip && \
     pip install virtualenv && \
