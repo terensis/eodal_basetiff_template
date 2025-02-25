@@ -15,7 +15,11 @@ RUN pip install --upgrade pip && \
     pip install virtualenv && \
     pip install contextily && \
     pip install imageio && \
-    pip install matplotlib-scalebar
+    pip install geopandas && \
+    pip install rasterio && \
+    pip install matplotlib-scalebar && \
+    pip install git+https://github.com/EOA-team/eodal@v0.2.5 && \
+    pip install git+https://github.com/terensis/eodal_basetiffs_GPL3@1.3
 
 # make the script executable
 RUN chmod +x ./eodal_basetiffs.sh
